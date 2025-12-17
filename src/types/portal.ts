@@ -20,6 +20,7 @@ export interface ClientProfile {
   onboardingDate: Date;
   balanceDue: number;
   avatarUrl?: string;
+  bookCoverUrl?: string;
 }
 
 export interface Document {

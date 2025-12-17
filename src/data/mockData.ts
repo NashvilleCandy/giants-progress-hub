@@ -15,6 +15,7 @@ export const mockClient: ClientProfile = {
   onboardingDate,
   balanceDue: 2450.00,
   avatarUrl: undefined,
+  bookCoverUrl: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=400&fit=crop',
 };
 
 export const mockProgressSteps: ProgressStep[] = PROGRESS_STEPS.map((step, index) => {
