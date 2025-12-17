@@ -9,9 +9,9 @@ const generateDueDate = (weekOffset: number) => addWeeks(onboardingDate, weekOff
 
 export const mockClient: ClientProfile = {
   id: 'client-1',
-  name: 'Sarah Mitchell',
-  email: 'sarah.mitchell@email.com',
-  bookTitle: 'Leadership Unleashed: A Giant\'s Journey',
+  name: 'Candy Pruitt',
+  email: 'candy.pruitt@email.com',
+  bookTitle: 'Stand on the Shoulders of Mindset Mastery Giants featuring Candy Pruitt',
   onboardingDate,
   balanceDue: 2450.00,
   avatarUrl: undefined,
