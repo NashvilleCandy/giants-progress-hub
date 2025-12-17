@@ -66,11 +66,19 @@ const ReorderBooks: React.FC = () => {
         <div className="lg:col-span-2 space-y-6">
           {/* Book info */}
           <div className="bg-card rounded-xl border border-border p-6">
-            <div className="flex gap-4">
-              {/* Book cover placeholder */}
-              <div className="w-24 h-32 bg-gradient-to-br from-giants-red to-giants-red-dark rounded-lg flex items-center justify-center shadow-glow-red shrink-0">
-                <Package className="w-8 h-8 text-gold" />
-              </div>
+            <div className="flex gap-6">
+              {/* Book cover */}
+              {mockClient.bookCoverUrl ? (
+                <img 
+                  src={mockClient.bookCoverUrl} 
+                  alt={mockClient.bookTitle}
+                  className="w-32 h-44 object-cover rounded-lg shadow-glow-red shrink-0"
+                />
+              ) : (
+                <div className="w-32 h-44 bg-gradient-to-br from-giants-red to-giants-red-dark rounded-lg flex items-center justify-center shadow-glow-red shrink-0">
+                  <Package className="w-10 h-10 text-gold" />
+                </div>
+              )}
               
               <div className="flex-1">
                 <h2 className="text-xl font-semibold text-foreground mb-1">
