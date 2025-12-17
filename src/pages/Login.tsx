@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Crown, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import giantsLogo from '@/assets/giants-logo.png';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -55,14 +56,9 @@ const Login: React.FC = () => {
         
         <div className="relative z-10 flex flex-col justify-center p-12">
           {/* Logo */}
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 rounded-xl bg-gradient-premium flex items-center justify-center shadow-glow-red">
-              <Crown className="w-9 h-9 text-gold" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-serif font-bold text-sidebar-foreground">GIANTS</h1>
-              <p className="text-sm text-sidebar-foreground/60">Client Portal</p>
-            </div>
+          <div className="mb-8">
+            <img src={giantsLogo} alt="GIANTS" className="h-20 w-auto" />
+            <p className="text-sm text-sidebar-foreground/60 mt-2">Client Portal</p>
           </div>
 
           {/* Tagline */}
@@ -91,14 +87,9 @@ const Login: React.FC = () => {
       <div className="flex-1 flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-md">
           {/* Mobile logo */}
-          <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-lg bg-gradient-premium flex items-center justify-center shadow-glow-red">
-              <Crown className="w-7 h-7 text-gold" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-serif font-bold text-foreground">GIANTS</h1>
-              <p className="text-xs text-muted-foreground">Client Portal</p>
-            </div>
+          <div className="lg:hidden flex flex-col items-center mb-8">
+            <img src={giantsLogo} alt="GIANTS" className="h-16 w-auto" />
+            <p className="text-xs text-muted-foreground mt-2">Client Portal</p>
           </div>
 
           {/* Form header */}

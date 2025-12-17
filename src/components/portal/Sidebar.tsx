@@ -10,10 +10,10 @@ import {
   ShoppingCart,
   User,
   LogOut,
-  Crown,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ClientProfile } from '@/types/portal';
+import giantsLogo from '@/assets/giants-logo.png';
 
 interface SidebarProps {
   client: ClientProfile;
@@ -37,14 +37,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ client, onLogout }) => {
     <aside className="fixed left-0 top-0 h-screen w-64 bg-sidebar flex flex-col border-r border-sidebar-border z-40">
       {/* Logo/Brand */}
       <div className="p-6 border-b border-sidebar-border">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-premium flex items-center justify-center shadow-glow-red">
-            <Crown className="w-6 h-6 text-gold" />
-          </div>
-          <div>
-            <h1 className="text-lg font-serif font-bold text-sidebar-foreground">GIANTS</h1>
-            <p className="text-xs text-sidebar-foreground/60">Client Portal</p>
-          </div>
+        <div className="flex flex-col items-center gap-2">
+          <img src={giantsLogo} alt="GIANTS" className="h-14 w-auto" />
+          <p className="text-xs text-sidebar-foreground/60">Client Portal</p>
         </div>
       </div>
 
