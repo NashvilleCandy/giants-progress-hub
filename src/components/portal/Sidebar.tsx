@@ -38,7 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ client, onLogout }) => {
       {/* Logo/Brand */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex flex-col items-center gap-2">
-          <img src={giantsLogo} alt="GIANTS" className="h-14 w-auto" />
+          <img src={giantsLogo} alt="GIANTS" className="h-20 w-auto" />
           <p className="text-xs text-sidebar-foreground/60">Client Portal</p>
         </div>
       </div>
