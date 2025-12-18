@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockClient } from '@/data/mockData';
+import { getClientProfile } from '@/data/ghlClientData';
 import { format } from 'date-fns';
 import { 
   User, 
@@ -18,6 +18,9 @@ import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+
+// GHL Data - automatically uses {{contact.xxx}} template variables when deployed
+const client = getClientProfile();
 
 const Account: React.FC = () => {
   const { toast } = useToast();
@@ -58,10 +61,10 @@ const Account: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-6 mb-6">
-          {/* Avatar */}
+          {/* Avatar - Uses GHL {{contact.full_name}} initials */}
           <div className="w-20 h-20 rounded-full bg-gradient-premium flex items-center justify-center">
             <span className="text-2xl font-bold text-primary-foreground">
-              {mockClient.name.split(' ').map(n => n[0]).join('')}
+              {client.name.split(' ').map(n => n[0]).join('')}
             </span>
           </div>
           <div>
@@ -72,22 +75,24 @@ const Account: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="name" className="text-sm text-muted-foreground">Full Name</Label>
-            <Input id="name" defaultValue={mockClient.name} className="mt-1" />
+            {/* Uses GHL {{contact.full_name}} when deployed */}
+            <Input id="name" defaultValue={client.name} className="mt-1" />
           </div>
           <div>
             <Label htmlFor="email" className="text-sm text-muted-foreground">Email</Label>
-            <Input id="email" defaultValue={mockClient.email} className="mt-1" />
+            {/* Uses GHL {{contact.email}} when deployed */}
+            <Input id="email" defaultValue={client.email} className="mt-1" />
           </div>
         </div>
 
         <Separator className="my-6" />
 
-        {/* Book info (read-only) */}
+        {/* Book info (read-only) - Uses GHL {{contact.book_title}} and {{contact.onboarding_date}} */}
         <div className="space-y-4">
           <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
             <Book className="w-5 h-5 text-muted-foreground" />
             <div>
-              <p className="text-sm font-medium text-foreground">{mockClient.bookTitle}</p>
+              <p className="text-sm font-medium text-foreground">{client.bookTitle}</p>
               <p className="text-xs text-muted-foreground">Your current book project</p>
             </div>
           </div>
@@ -95,7 +100,7 @@ const Account: React.FC = () => {
             <Calendar className="w-5 h-5 text-muted-foreground" />
             <div>
               <p className="text-sm font-medium text-foreground">
-                Started {format(mockClient.onboardingDate, 'MMMM d, yyyy')}
+                Started {format(client.onboardingDate, 'MMMM d, yyyy')}
               </p>
               <p className="text-xs text-muted-foreground">Onboarding date</p>
             </div>
@@ -160,8 +165,9 @@ const Account: React.FC = () => {
         <div className="mt-4 p-4 border border-border rounded-lg">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Current Balance Due</span>
+            {/* Uses GHL {{contact.balance_due}} when deployed */}
             <span className="text-lg font-bold text-giants-red">
-              ${mockClient.balanceDue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              ${client.balanceDue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
           </div>
         </div>

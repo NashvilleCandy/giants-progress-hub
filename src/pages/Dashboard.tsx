@@ -1,5 +1,6 @@
 import React from 'react';
-import { mockClient, mockProgressSteps, mockDocuments, mockMessages, mockCourses } from '@/data/mockData';
+import { getClientProfile, getProgressSteps, getDocuments } from '@/data/ghlClientData';
+import { mockMessages, mockCourses } from '@/data/mockData';
 import { format } from 'date-fns';
 import { 
   BookOpen, 
@@ -15,19 +16,24 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
+// GHL Data - automatically uses {{contact.xxx}} template variables when deployed
+const client = getClientProfile();
+const progressSteps = getProgressSteps();
+const documents = getDocuments();
+
 const Dashboard: React.FC = () => {
-  const currentStep = mockProgressSteps.find(s => s.status === 'in-progress');
-  const overdueSteps = mockProgressSteps.filter(s => s.status === 'overdue');
-  const completedCount = mockProgressSteps.filter(s => s.status === 'completed').length;
+  const currentStep = progressSteps.find(s => s.status === 'in-progress');
+  const overdueSteps = progressSteps.filter(s => s.status === 'overdue');
+  const completedCount = progressSteps.filter(s => s.status === 'completed').length;
   const unreadMessages = mockMessages.filter(m => !m.isRead && m.senderRole === 'admin').length;
-  const recentDocs = mockDocuments.slice(0, 3);
+  const recentDocs = documents.slice(0, 3);
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Welcome header */}
+      {/* Welcome header - Uses GHL {{contact.first_name}} when deployed */}
       <div className="mb-8">
         <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
-          Welcome back, {mockClient.name.split(' ')[0]}!
+          Welcome back, {client.name.split(' ')[0]}!
         </h1>
         <p className="text-muted-foreground">
           Here's an overview of your book journey with GIANTS.
@@ -62,12 +68,12 @@ const Dashboard: React.FC = () => {
           </div>
           <h3 className="text-sm text-muted-foreground mb-1">Progress</h3>
           <p className="text-lg font-semibold text-foreground">
-            {completedCount} of {mockProgressSteps.length} Steps
+            {completedCount} of {progressSteps.length} Steps
           </p>
           <div className="w-full bg-muted rounded-full h-2 mt-2">
             <div 
               className="bg-success h-2 rounded-full transition-all duration-500"
-              style={{ width: `${(completedCount / mockProgressSteps.length) * 100}%` }}
+              style={{ width: `${(completedCount / progressSteps.length) * 100}%` }}
             />
           </div>
         </div>
@@ -192,10 +198,11 @@ const Dashboard: React.FC = () => {
           <div className="w-16 h-20 bg-gradient-to-br from-giants-red to-giants-red-dark rounded-lg flex items-center justify-center shadow-glow-red">
             <BookOpen className="w-8 h-8 text-gold" />
           </div>
+          {/* Book info - Uses GHL {{contact.book_title}} and {{contact.onboarding_date}} */}
           <div className="flex-1">
-            <h3 className="text-xl font-serif font-bold text-foreground mb-1">{mockClient.bookTitle}</h3>
+            <h3 className="text-xl font-serif font-bold text-foreground mb-1">{client.bookTitle}</h3>
             <p className="text-sm text-muted-foreground mb-3">
-              Started on {format(mockClient.onboardingDate, 'MMMM d, yyyy')}
+              Started on {format(client.onboardingDate, 'MMMM d, yyyy')}
             </p>
             <div className="flex gap-2">
               <Link to="/progress">
