@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { mockClient } from '@/data/mockData';
+import { getClientProfile } from '@/data/ghlClientData';
 import { 
   ShoppingCart, 
   Minus, 
@@ -15,6 +15,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
+
+// GHL Data - automatically uses {{contact.xxx}} template variables when deployed
+const client = getClientProfile();
 
 const ReorderBooks: React.FC = () => {
   const [quantity, setQuantity] = useState(10);
@@ -67,11 +70,11 @@ const ReorderBooks: React.FC = () => {
           {/* Book info */}
           <div className="bg-card rounded-xl border border-border p-6">
             <div className="flex gap-6">
-              {/* Book cover */}
-              {mockClient.bookCoverUrl ? (
+              {/* Book cover - Uses GHL {{contact.book_cover_url}} when deployed */}
+              {client.bookCoverUrl ? (
                 <img 
-                  src={mockClient.bookCoverUrl} 
-                  alt={mockClient.bookTitle}
+                  src={client.bookCoverUrl} 
+                  alt={client.bookTitle}
                   className="w-32 h-44 object-cover rounded-lg shadow-glow-red shrink-0"
                 />
               ) : (
@@ -80,11 +83,12 @@ const ReorderBooks: React.FC = () => {
                 </div>
               )}
               
+              {/* Book details - Uses GHL {{contact.book_title}} and {{contact.full_name}} */}
               <div className="flex-1">
                 <h2 className="text-xl font-semibold text-foreground mb-1">
-                  {mockClient.bookTitle}
+                  {client.bookTitle}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-2">by {mockClient.name}</p>
+                <p className="text-sm text-muted-foreground mb-2">by {client.name}</p>
                 <p className="text-lg font-bold text-foreground">
                   ${pricePerBook.toFixed(2)} per book
                 </p>

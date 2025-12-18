@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockProgressSteps, mockSubmissions } from '@/data/mockData';
+import { getProgressSteps, getSubmissions } from '@/data/ghlClientData';
 import { format, isPast } from 'date-fns';
 import { 
   Check, 
@@ -13,6 +13,10 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+
+// GHL Data - automatically uses {{contact.step_X_status}}, {{contact.step_X_due_date}} when deployed
+const progressSteps = getProgressSteps();
+const submissions = getSubmissions();
 
 const Progress: React.FC = () => {
   const getStatusIcon = (status: string) => {
@@ -42,7 +46,7 @@ const Progress: React.FC = () => {
   };
 
   const getSubmission = (stepId: string) => {
-    return mockSubmissions.find(s => s.stepId === stepId);
+    return submissions.find(s => s.stepId === stepId);
   };
 
   return (
@@ -64,7 +68,7 @@ const Progress: React.FC = () => {
         </div>
 
         <div className="divide-y divide-border">
-          {mockProgressSteps.map((step, index) => {
+          {progressSteps.map((step, index) => {
             const submission = getSubmission(step.id);
             const isPointOfNoReturn = step.id === 'final-chapter';
             
@@ -85,7 +89,7 @@ const Progress: React.FC = () => {
                   )}>
                     {getStatusIcon(step.status)}
                   </div>
-                  {index < mockProgressSteps.length - 1 && (
+                  {index < progressSteps.length - 1 && (
                     <div className={cn(
                       'w-0.5 h-8 mt-2',
                       step.status === 'completed' ? 'bg-success' : 'bg-border'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { mockDocuments } from '@/data/mockData';
+import { getDocuments } from '@/data/ghlClientData';
 import { format } from 'date-fns';
 import { 
   FileText, 
@@ -23,12 +23,15 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
+// GHL Data - document URLs come from {{contact.doc_xxx_url}} when deployed
+const allDocuments = getDocuments();
+
 const Documents: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const { toast } = useToast();
 
-  const filteredDocs = mockDocuments.filter(doc => {
+  const filteredDocs = allDocuments.filter(doc => {
     const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = typeFilter === 'all' || doc.type === typeFilter;
     return matchesSearch && matchesType;
@@ -65,14 +68,14 @@ const Documents: React.FC = () => {
     }
   };
 
-  const handleDownload = (doc: typeof mockDocuments[0]) => {
+  const handleDownload = (doc: typeof allDocuments[0]) => {
     toast({
       title: "Downloading",
       description: `Starting download for ${doc.name}`,
     });
   };
 
-  const handlePreview = (doc: typeof mockDocuments[0]) => {
+  const handlePreview = (doc: typeof allDocuments[0]) => {
     toast({
       title: "Preview",
       description: `Opening preview for ${doc.name}`,
