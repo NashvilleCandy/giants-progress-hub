@@ -16,7 +16,7 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({ balance, className, on
     <div
       className={cn(
         'relative overflow-hidden rounded-xl p-4 transition-all duration-300',
-        'bg-card border border-border',
+        'bg-muted/60 border border-border',
         hasBalance && 'premium-border',
         className
       )}
