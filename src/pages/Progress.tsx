@@ -78,16 +78,22 @@ const Progress: React.FC = () => {
                 className={cn(
                   'px-6 py-4 flex items-start gap-4 transition-colors',
                   step.status === 'in-progress' && 'bg-gold/5',
-                  step.status === 'overdue' && 'bg-destructive/5'
+                  step.status === 'overdue' && 'bg-destructive/5',
+                  isPointOfNoReturn && 'border-l-4 border-l-destructive bg-destructive/5'
                 )}
               >
                 {/* Step number and icon */}
                 <div className="flex flex-col items-center">
                   <div className={cn(
                     'w-10 h-10 rounded-full flex items-center justify-center',
-                    getStatusStyles(step.status)
+                    getStatusStyles(step.status),
+                    isPointOfNoReturn && step.status !== 'completed' && 'ring-2 ring-destructive ring-offset-2 ring-offset-background'
                   )}>
-                    {getStatusIcon(step.status)}
+                    {isPointOfNoReturn && step.status !== 'completed' ? (
+                      <AlertCircle className="w-5 h-5" />
+                    ) : (
+                      getStatusIcon(step.status)
+                    )}
                   </div>
                   {index < progressSteps.length - 1 && (
                     <div className={cn(
@@ -106,14 +112,10 @@ const Progress: React.FC = () => {
                         step.status === 'completed' && 'text-success',
                         step.status === 'in-progress' && 'text-gold-dark',
                         step.status === 'overdue' && 'text-destructive',
-                        step.status === 'pending' && 'text-muted-foreground'
+                        step.status === 'pending' && 'text-muted-foreground',
+                        isPointOfNoReturn && step.status !== 'completed' && 'text-destructive'
                       )}>
                         {step.name}
-                        {isPointOfNoReturn && (
-                          <span className="ml-2 text-xs bg-destructive/20 text-destructive px-2 py-0.5 rounded-full">
-                            Point of No Return
-                          </span>
-                        )}
                       </h3>
                       <p className="text-sm text-muted-foreground mt-1">{step.description}</p>
                     </div>
@@ -129,6 +131,30 @@ const Progress: React.FC = () => {
                       {step.status.charAt(0).toUpperCase() + step.status.slice(1).replace('-', ' ')}
                     </span>
                   </div>
+
+                  {/* Point of No Return Warning */}
+                  {isPointOfNoReturn && step.status !== 'completed' && (
+                    <div className="mt-4 p-4 bg-destructive/10 border border-destructive/30 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-destructive flex items-center justify-center shrink-0">
+                          <Lock className="w-5 h-5 text-destructive-foreground" />
+                        </div>
+                        <div>
+                          <h4 className="text-base font-bold text-destructive uppercase tracking-wide">
+                            ⚠️ Point of No Return
+                          </h4>
+                          <p className="text-sm text-foreground mt-2 leading-relaxed">
+                            <strong>This is your final opportunity to make changes.</strong> Once you sign off on your last chapter edits, 
+                            <span className="text-destructive font-semibold"> no more story edits or punctuation changes</span> will be accepted.
+                          </p>
+                          <p className="text-sm text-muted-foreground mt-2">
+                            The next time you see your chapters will be during <strong>Layout Approval</strong>, 
+                            where you can only approve the visual formatting—no content changes allowed at that stage.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Due date and completion info */}
                   <div className="flex items-center gap-4 mt-3 text-sm">
