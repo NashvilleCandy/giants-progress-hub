@@ -78,7 +78,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ steps, className }) =>
       </div>
 
       {/* Step indicators */}
-      <div className="flex items-start justify-between gap-1 overflow-x-auto pb-2">
+      <div className="flex items-start justify-between gap-1 overflow-x-auto pb-2 pt-3">
         {steps.map((step, index) => (
           <Tooltip key={step.id}>
             <TooltipTrigger asChild>
