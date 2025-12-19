@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
         {/* Current Step */}
         <div className="bg-card rounded-xl p-5 border border-border card-glow">
           <div className="flex items-start justify-between mb-3">
-            <div className="p-2 rounded-lg bg-gold/10">
+            <div className="p-2 rounded-lg bg-gold/20 border border-gold/40">
               <Clock className="w-5 h-5 text-gold-dark" />
             </div>
             <span className="status-badge status-in-progress">In Progress</span>
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
         {/* Progress */}
         <div className="bg-card rounded-xl p-5 border border-border card-glow">
           <div className="flex items-start justify-between mb-3">
-            <div className="p-2 rounded-lg bg-success/10">
+            <div className="p-2 rounded-lg bg-success/20 border border-success/40">
               <CheckCircle2 className="w-5 h-5 text-success" />
             </div>
           </div>
@@ -85,8 +85,8 @@ const Dashboard: React.FC = () => {
         )}>
           <div className="flex items-start justify-between mb-3">
             <div className={cn(
-              "p-2 rounded-lg",
-              overdueSteps.length > 0 ? 'bg-destructive/10' : 'bg-muted'
+              "p-2 rounded-lg border",
+              overdueSteps.length > 0 ? 'bg-destructive/20 border-destructive/40' : 'bg-muted border-muted-foreground/20'
             )}>
               <AlertCircle className={cn(
                 "w-5 h-5",
@@ -109,7 +109,7 @@ const Dashboard: React.FC = () => {
         {/* Messages */}
         <div className="bg-card rounded-xl p-5 border border-border card-glow">
           <div className="flex items-start justify-between mb-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="p-2 rounded-lg bg-primary/20 border border-primary/40">
               <MessageSquare className="w-5 h-5 text-primary" />
             </div>
             {unreadMessages > 0 && (
