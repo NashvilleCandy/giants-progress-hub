@@ -89,7 +89,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ steps, className }) =>
                     'w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer',
                     getStepColor(step),
                     getGlowClass(step),
-                    step.status === 'in-progress' && 'ring-2 ring-gold/50 ring-offset-2 ring-offset-background'
+                    step.status === 'in-progress' && 'ring-2 ring-gold/50 ring-offset-2 ring-offset-background',
+                    step.status === 'overdue' && 'ring-2 ring-destructive/50 ring-offset-2 ring-offset-background'
                   )}
                 >
                   {getStepIcon(step)}
