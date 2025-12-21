@@ -8,6 +8,7 @@ import {
   MessageSquare,
   GraduationCap,
   ShoppingCart,
+  Users,
   User,
   LogOut,
 } from 'lucide-react';
@@ -28,6 +29,7 @@ const menuItems = [
   { icon: MessageSquare, label: 'Messages', path: '/messages' },
   { icon: GraduationCap, label: 'Classes', path: '/classes' },
   { icon: ShoppingCart, label: 'Re-Order Books', path: '/reorder' },
+  { icon: Users, label: 'Referrals', path: '/referrals' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ client, onLogout }) => {

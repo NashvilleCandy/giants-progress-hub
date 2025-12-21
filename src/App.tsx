@@ -12,6 +12,7 @@ import Documents from "./pages/Documents";
 import Messages from "./pages/Messages";
 import Classes from "./pages/Classes";
 import ReorderBooks from "./pages/ReorderBooks";
+import Referrals from "./pages/Referrals";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/messages" element={<Messages />} />
             <Route path="/classes" element={<Classes />} />
             <Route path="/reorder" element={<ReorderBooks />} />
+            <Route path="/referrals" element={<Referrals />} />
             <Route path="/account" element={<Account />} />
           </Route>
           
